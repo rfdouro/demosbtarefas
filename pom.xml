@@ -11,7 +11,7 @@
  <groupId>br.org.rfdouro</groupId>
  <artifactId>demosbtarefas</artifactId>
  <version>1</version>
- <packaging>war</packaging>
+ <packaging>jar</packaging>
  <name>demosbtarefas</name>
  <description>Demo de API de tarefas</description>
  <properties>
