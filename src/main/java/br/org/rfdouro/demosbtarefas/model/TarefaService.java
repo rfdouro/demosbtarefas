@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
  * @author rfdouro
  * 
  * Simula um banco de tarefas usando lista em memória 
+ * uma lista como atributo de classe
  */
 @Service
 public class TarefaService {
