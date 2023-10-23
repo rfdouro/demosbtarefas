@@ -1,5 +1,5 @@
 br\org\rfdouro\demosbtarefas\control\TarefaController.class
-br\org\rfdouro\demosbtarefas\model\TarefaRepository.class
 br\org\rfdouro\demosbtarefas\model\Tarefa.class
 br\org\rfdouro\demosbtarefas\ServletInitializer.class
 br\org\rfdouro\demosbtarefas\DemotarefasApplication.class
+br\org\rfdouro\demosbtarefas\model\TarefaService.class

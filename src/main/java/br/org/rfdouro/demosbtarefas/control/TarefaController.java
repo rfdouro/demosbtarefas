@@ -1,7 +1,7 @@
 package br.org.rfdouro.demosbtarefas.control;
 
 import br.org.rfdouro.demosbtarefas.model.Tarefa;
-import br.org.rfdouro.demosbtarefas.model.TarefaRepository;
+import br.org.rfdouro.demosbtarefas.model.TarefaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -28,7 +28,7 @@ public class TarefaController {
  insere automaticamente um repositório de dados para tarefas
   */
  @Autowired
- TarefaRepository repository;
+ TarefaService repository;
 
  /*
  método que retorna a listagem de tarefas ordenada por descrição
@@ -36,7 +36,10 @@ public class TarefaController {
   */
  @GetMapping({"", "/"})
  public List<Tarefa> getTarefas() {
-  return repository.findAll(Sort.by("descricao"));
+  TarefaService.tarefas.sort((o1, o2) -> {
+   return o1.getDescricao().compareTo(o2.getDescricao());
+  });
+  return TarefaService.tarefas;
  }
 
 /*
@@ -47,7 +50,10 @@ public class TarefaController {
   */
  @GetMapping("/pesquisa")
  public List<Tarefa> getTarefas(String descricao) {
-  return repository.procuraPorDescricao(descricao, Sort.by("descricao"));
+  TarefaService.tarefas.sort((o1, o2) -> {
+   return o1.getDescricao().compareTo(o2.getDescricao());
+  });
+  return TarefaService.tarefas;
  }
 
  /*
@@ -59,7 +65,7 @@ public class TarefaController {
   */
  @PostMapping({"", "/"})
  public Tarefa insere(@RequestBody Tarefa tarefa) {
-  return repository.save(tarefa);
+  return repository.adiciona(tarefa);
  }
 
  /*
@@ -74,7 +80,7 @@ public class TarefaController {
  @PutMapping({"", "/"})
  public Tarefa atualiza(@RequestBody Tarefa tarefa) {
   if (tarefa.getId() != null) {
-   return repository.save(tarefa);
+   return repository.atualiza(tarefa);
   }
   return null;
  }
@@ -87,9 +93,9 @@ public class TarefaController {
  se usa o @PathVariable indicativo
   */
  @DeleteMapping("/{id}")
- public String atualiza(@PathVariable("id") Long id) {
+ public String exclui(@PathVariable("id") Long id) {
   if (id != null) {
-   repository.deleteById(id);
+   repository.remove(id);
    return "Excluído";
   }
   return null;
